@@ -1,0 +1,156 @@
+#include <iostream>
+#include <string.h>
+
+using namespace std;
+
+class Student
+{
+protected:
+
+    struct stud
+    {
+        string surname, name, fathername, age;
+        stud *next = NULL;
+    };    
+    stud *head = NULL;
+    
+public:
+    
+    void push()
+    {
+        string surname_, name_, fathername_, age_; 
+        stud *tmp = new stud;
+        
+        cout << "введите фамилию: ";
+        cin >> surname_;
+        cout << "введите имя: ";
+        cin >> name_;
+        cout << "введите отчество: ";
+        cin >> fathername_;
+        cout << "введите возраст: ";
+        cin >> age_;
+        
+        tmp->surname = surname_;
+        tmp->name = name_;
+        tmp->fathername = fathername_;
+        tmp->age = age_;
+        
+        tmp->next = head;
+        head = tmp;
+        
+        cout << "\nНОВЫЙ элемент успешно добавлен в СТЭК!\n";
+        cout << "адрес: " << tmp << "\n\n";
+    }
+    
+    void pop()
+    {
+        if (head == NULL)
+        {
+            cout << "удалять нечего.....\n\n";    
+        }
+        else
+        {
+            cout << "Элемент успешно удалён.\n";
+            cout << "адрес: " << head << "\n\n";
+            head = head->next;
+        }
+    }
+    
+    void pop_all()
+    {
+        if (head == NULL)
+        {
+            cout << "удалять нечего.....\n\n";    
+        }
+        else
+        {
+            cout << "Элементы успешно удалёны.\n";
+            while (head != NULL)
+            {
+                cout << "адрес: " << head << "\n";
+                head = head->next;
+            }
+        } 
+    }
+
+    void show()
+    {
+        if (head != NULL)
+        {
+            cout << "Чтение (разрушающее) ГОЛОВНОГО элементов СТЕКА. ЕГо значение " << head->surname << " " << head->name << " " << head->fathername;
+            cout << "\nЭлемент успешно прочитан и удалён.\n";
+            cout << "адрес: " << head << "\n\n";
+            head = head->next;
+        }
+        else
+        
+            cout << "Чтение ГОЛОВНОГО элемента СТЕКА! Неудачная попытка, СТЕК в данный момент пуст\n\n";   
+    }
+    
+    void show_first()
+    {
+        stud *tmp;
+        
+        tmp = head;
+        
+        if (tmp == NULL)
+        {
+            cout << "чтение невозможно, так как тут ничего нет(";
+        }
+        else
+        {
+            while(tmp != NULL)
+            {
+                if (tmp->next == NULL)
+                {
+                    cout << "Чтение ПЕРВОГО элементов СТЕКА. ЕГо значение " << tmp->surname << " " << tmp->name << " " << tmp->fathername;
+                    cout << "\nпервый элемент успешно прочитан.\n";
+                    cout << "адрес: " << tmp << "\n\n";    
+                }
+                tmp = tmp->next;
+            }
+        }
+    }
+    
+    void show_all()
+    {
+        if (head == NULL)
+        {
+            cout << "ERROR. Стек пуст:(\n\n";
+        }
+        else
+        {
+            cout << "Чтение (разрушающее) ВСЕХ элементов СТЕКА. ИХ значения:\n\n";
+            while (head != NULL)
+            {
+                cout << head->surname << " " << head->name << " " << head->fathername << "\n";
+                cout << "адрес: " << head << "\n\n";
+                head = head->next;
+            }
+            cout << "Элементы успешно прочитаны и удалены.\n\n";
+        }
+    }
+
+};
+
+int main()
+{
+    Student abc;
+    string value;
+    
+    while(1)
+    {
+        cout << "\n>>>";
+        cin >> value;
+        
+        if (value == "1") abc.push();
+        if (value == "2") abc.pop();
+        if (value == "3") abc.pop_all();
+        if (value == "4") abc.show();
+        if (value == "5") abc.show_first();
+        if (value == "6") abc.show_all();
+        if (value == "exit") return 0;
+    }
+    
+    return 0;
+}
