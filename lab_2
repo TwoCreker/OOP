@@ -14,6 +14,8 @@ protected:
     };    
     stud *head = NULL;
     
+    int count = 0;
+    
 public:
     
     void push()
@@ -40,6 +42,8 @@ public:
         
         cout << "\nНОВЫЙ элемент успешно добавлен в СТЭК!\n";
         cout << "адрес: " << tmp << "\n\n";
+        
+        count++;
     }
     
     void pop()
@@ -53,7 +57,10 @@ public:
             cout << "Элемент успешно удалён.\n";
             cout << "адрес: " << head << "\n\n";
             head = head->next;
+            
+            count--;
         }
+        
     }
     
     void pop_all()
@@ -70,6 +77,8 @@ public:
                 cout << "адрес: " << head << "\n";
                 head = head->next;
             }
+            
+            count = 0;
         } 
     }
 
@@ -81,6 +90,8 @@ public:
             cout << "\nЭлемент успешно прочитан и удалён.\n";
             cout << "адрес: " << head << "\n\n";
             head = head->next;
+            
+            count--;
         }
         else
         
@@ -128,7 +139,22 @@ public:
                 head = head->next;
             }
             cout << "Элементы успешно прочитаны и удалены.\n\n";
+            
+            count = 0;
         }
+    }
+    
+    void NumOfElement()
+    {
+        cout << "количество элементов: " << count << "\n\n";
+    }
+    
+    void menu()
+    {
+        cout << " Введите 1 для добавления элемента в СТЕК\n введите 2 для удаления элемента СТЕКА\n";
+        cout << " введите 3 для удаления ВСЕХ элементов СТЕКА\n введите 4 для разрушающего чтения элемента СТЕКА\n";
+        cout << " введите 5 для прочтния ПЕРВОГО элемента СТЕКА\n введите 6 для прочтения всех элементов СТЕКА\n";
+        cout << " введите 7 для вывода кол-ва элементов в СТЕКE\n\n";
     }
 
 };
@@ -140,6 +166,7 @@ int main()
     
     while(1)
     {
+        abc.menu();
         cout << "\n>>>";
         cin >> value;
         
@@ -149,6 +176,7 @@ int main()
         if (value == "4") abc.show();
         if (value == "5") abc.show_first();
         if (value == "6") abc.show_all();
+        if (value == "7") abc.NumOfElement();
         if (value == "exit") return 0;
     }
     
